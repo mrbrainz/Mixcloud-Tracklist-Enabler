@@ -371,3 +371,35 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
+
+.instructions {
+  padding: 30px 20px;
+  margin: 10px 0;
+  border: 2px solid #2b7bb9;
+  background: #e9f7ff;
+
+}
+
+.instructions li {
+  margin: 0 30px;
+}
+
+.bookmarklet {
+  background: #990000;
+  border: 3px solid #990000;
+  color: #fff;
+  padding: 10px 10px;
+  text-transform:  uppercase;
+  font-weight: bold;
+  display: block;
+  clear: both;
+  margin: 10px auto;
+  width: 300px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.bookmarklet:hover {
+  background: #fff;
+}
+

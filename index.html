@@ -22,25 +22,45 @@
           <h2>Bookmarklet to re-enable Mixcloud tracklists</h2>
         </header>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        
 
         <hr>
 
         <section id="main_content">
           <h3>
-<a id="mixcloud-tracklist-enabler" class="anchor" href="#mixcloud-tracklist-enabler" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mixcloud Tracklist Enabler</h3>
+            <a id="mixcloud-tracklist-enabler" class="anchor" href="#mixcloud-tracklist-enabler" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mixcloud Tracklist Enabler
+          </h3>
 
-<p>Coming soon....</p>
+          <p>So Mixcloud decided to turn off Tracklists. This is more than likely to do with pressure from the Music Industry.</p>
+
+          <p>Sick of protecting a decaying industry through destruction of innovation? Me too!</p>
+
+          <h3>How to re-enable Tracklists on Mixcloud</h3>
+          <p>I've created a handy <strong>Mixcloud Tracklist Bookmarklet</strong> that allows you to re-enable tracklists on Mixcloud.
+          <ol class="instructions">
+            <li>Drag this link to your Bookmark Bar <a class="bookmarklet" href="javascript:(function()%7Bvar%20keyurl%20%3D%20'https%3A%2F%2Fwww.mixcloud.com%2Fplayer%2Fdetails%2F%3Fkey%3D'%2BencodeURIComponent(window.location.pathname)%3B%24.getJSON(%20keyurl%20).done(function(%20brainzrapedata%20)%20%7Bvar%20brainzinsertionooo%20%3D%20''%2Ctrackno%20%3D%201%2Ctracks%20%3D%20''%2Ctimeindexes%20%3D%20''%3Bfor%20(var%20track%20in%20brainzrapedata.cloudcast.sections)%20%7Bif%20(brainzrapedata.cloudcast.sections%5Btrack%5D.hasOwnProperty('chapter'))%20%7Btracks%20%2B%3D%20'%3Cdiv%20class%3D%22track-row%20cf%22%3E%3Cdiv%20class%3D%22container%22%3E%3Cdiv%20class%3D%22track-name%20tracklist-chapter%22%20title%3D%22'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.chapter%2B'%22%3E%3Cspan%20class%3D%22track-number%22%3E'%2Btrackno%2B'.%3C%2Fspan%3E'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.chapter%2B'%3C%2Fdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E'%3B%7D%20else%20%7Btracks%20%2B%3D%20'%3Cdiv%20class%3D%22track-row%20cf%22%3E%3Cdiv%20class%3D%22container%22%3E%3Cdiv%20class%3D%22track-name%22%20title%3D%22'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.title%2B'%22%3E%3Cspan%20class%3D%22track-number%22%3E'%2Btrackno%2B'.%3C%2Fspan%3E%3Ca%20class%3D%22track-song-name-link%22%20href%3D%22'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.track_url%2B'%22%20target%3D%22_blank%22%3E'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.title%2B'%3C%2Fa%3E%3C%2Fdiv%3E%3Cdiv%20class%3D%22track-by%22%3E%3Cspan%20class%3D%22track-by-name%22%3Eby%3C%2Fspan%3E%3Ca%20class%3D%22artist-name-link%22%20href%3D%22'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.artist_url%2B'%22%20target%3D%22_blank%22%3E%3Cstrong%3E'%2Bbrainzrapedata.cloudcast.sections%5Btrack%5D.artist%2B'%3C%2Fstrong%3E%3C%2Fa%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E'%3B%7Dtrackno%2B%2B%3Btimeindexes%20%2B%3D%20(brainzrapedata.cloudcast.sections%5Btrack%5D.start_time)%20%3F%20brainzrapedata.cloudcast.sections%5Btrack%5D.start_time%2B'%2C%20'%20%3A%20''%3B%7Dbrainzinsertionooo%20%2B%3D%20'%3Cdiv%20ng-controller%3D%22CloudcastHeaderCtrl%22%20class%3D%22ng-scope%22%3E%3Cdiv%20ng-init%3D%22tracklistShown%3Dfalse%3BaudioLength%3D'%2Bbrainzrapedata.cloudcast.audio_length%2B'%3BsectionStartTimes%3D%5B'%2Btimeindexes.substring(0%2C%20timeindexes.length%20-%202)%2B'%22%3E%3Cdiv%20class%3D%22tracklist-toggle-container%22%3E%3Csvg%20version%3D%221.1%22%20class%3D%22tracklist-toggle-svg%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22160px%22%20height%3D%2226px%22%20viewBox%3D%220%200%20160%2026%22%20enable-background%3D%22new%200%200%20160%2026%22%20xml%3Aspace%3D%22preserve%22%3E%3Cswitch%3E%3Cg%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M160%2C26c0%2C0-5-2.135-5-5.043C155%2C14.744%2C155%2C5%2C155%2C5c0-2.761-2.238-5-5-5H10C7.239%2C0%2C5%2C2.239%2C5%2C5c0%2C0%2C0%2C9.803%2C0%2C16.014C5%2C23.893%2C0%2C26%2C0%2C26H160z%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3CforeignObject%20width%3D%220%22%20height%3D%220%22%20overflow%3D%22hidden%22%3E%3Cdiv%20class%3D%22tracklist-toggle-fallback%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fswitch%3E%3C%2Fsvg%3E%3Cdiv%20class%3D%22tracklist-toggle-text%22%20m-click%3D%22tracklistShown%3D!tracklistShown%22%3E%3Cspan%20ng-show%3D%22tracklistShown%22%20class%3D%22tracklist-toggle-arrow%20arrow-show%20ng-hide%22%3E%3Cspan%20class%3D%22tracklist-toggle-text-content%22%3EHide%20%3C%2Fspan%3E%3C%2Fspan%3E%3Cspan%20ng-show%3D%22!tracklistShown%22%20class%3D%22tracklist-toggle-arrow%22%3E%3Cspan%20class%3D%22tracklist-toggle-text-content%22%3EShow%20%3C%2Fspan%3E%3C%2Fspan%3E%3Cspan%20class%3D%22tracklist-toggle-text-content%22%3ETracklist%3C%2Fspan%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cdiv%20class%3D%22cloudcast-tracklist%22%20ng-class%3D%22%7B%5C'open%5C'%3AtracklistShown%7D%22%3E'%3Bbrainzinsertionooo%20%2B%3D%20tracks%3Bbrainzinsertionooo%20%2B%3D%20'%3C%2Fdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E'%3B%24('.cloudcast-header').after(brainzinsertionooo)%3B%24('.tracklist-toggle-text').click(function()%20%7Bif%20(%20!%24('.cloudcast-tracklist').hasClass('open')%20)%20%7B%24('.tracklist-toggle-arrow%3Anth-child(2)').addClass('ng-hide')%3B%24('.arrow-show').removeClass('ng-hide')%3B%24('.cloudcast-tracklist').addClass('open')%3B%7D%20else%20%7B%24('.tracklist-toggle-arrow%3Anth-child(2)').removeClass('ng-hide')%3B%24('.arrow-show').addClass('ng-hide')%3B%24('.cloudcast-tracklist').removeClass('open')%3B%7D%7D)%3Breturn%3B%7D)%7D)()">Mixcloud Tracklist Enabler</a></li>
+            <li>Go to your favourite <a href="https://www.mixcloud.com/MrBrainz/birthday-beats-birthday-bass-birthday-brainz-all-over-your-face-feat-guest-mc-marvel-ep-164/" target="_blank">EDM / Sync-button mixed generic Deep House mix</a> on Mixcloud</li>
+            <li>Click the Bookmarket. Jesus will rise, and tracklists WILL return</li>
+            <li>Optional: Follow me on <a href="https://twitter.com/mrbrainz" target="_blank">Twitter</a> and <a href="https://mixcloud.com/mrbrainz" target="_blank">Mixcloud</a> as a thank you</li>
+          </ol>
+
+          <p>And that is it. Super simple. You're welcome.</p>
+          <p>The nuts and bolts of how the script works is <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler" target="_blank">Githubbed</a>, so you can see it there if you care.</p>
         </section>
 
+        <hr>
+
         <footer>
-          Mixcloud tracklist enabler is maintained by <a href="https://github.com/mrbrainz">mrbrainz</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+          Mixcloud tracklist enabler is maintained by <a href="https://twitter.com/mrbrainz">MrBrainz</a>
         </footer>
+
+        <hr>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/mrbrainz/Mixcloud-Tracklist-Enabler" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
         
       </div>
