@@ -4,38 +4,43 @@ $.getJSON( keyurl ).done(function( brainzrapedata ) {
   var brainzinsertionooo = '',
   trackno = 1,
   tracks = '',
-  timeindexes = '';
+  timeindexes = '',
+  showhidebutton = '';
   
   
   
   for (var track in brainzrapedata.cloudcast.sections) {
-	  if (brainzrapedata.cloudcast.sections[track].hasOwnProperty('chapter')) {		  
-		  tracks += '<div class="track-row cf"><div class="container"><div class="track-name tracklist-chapter" title="'+brainzrapedata.cloudcast.sections[track].chapter+'"><span class="track-number">'+trackno+'.</span>'+brainzrapedata.cloudcast.sections[track].chapter+'</div></div></div>';
-	  } else {	  
-		  tracks += '<div class="track-row cf"><div class="container"><div class="track-name" title="'+brainzrapedata.cloudcast.sections[track].title+'"><span class="track-number">'+trackno+'.</span><a class="track-song-name-link" href="'+brainzrapedata.cloudcast.sections[track].track_url+'" target="_blank">'+brainzrapedata.cloudcast.sections[track].title+'</a></div><div class="track-by"><span class="track-by-name">by</span><a class="artist-name-link" href="'+brainzrapedata.cloudcast.sections[track].artist_url+'" target="_blank"><strong>'+brainzrapedata.cloudcast.sections[track].artist+'</strong></a></div></div></div>';
+	  if (brainzrapedata.cloudcast.sections[track].hasOwnProperty('chapter')) {
+		  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].chapter+'</b></li>';
+	  } else {	 
+		  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].title+'</b><small>by <span>'+brainzrapedata.cloudcast.sections[track].artist+'</span></small></li>';
 	  }
 	  
 	  trackno++;
 	  timeindexes += (brainzrapedata.cloudcast.sections[track].start_time) ? brainzrapedata.cloudcast.sections[track].start_time+', ' : '';
   }
   
-  brainzinsertionooo += '<div ng-controller="CloudcastHeaderCtrl" class="ng-scope"><div ng-init="tracklistShown=false;audioLength='+brainzrapedata.cloudcast.audio_length+';sectionStartTimes=['+timeindexes.substring(0, timeindexes.length - 2)+'"><div class="tracklist-toggle-container"><svg version="1.1" class="tracklist-toggle-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="160px" height="26px" viewBox="0 0 160 26" enable-background="new 0 0 160 26" xml:space="preserve"><switch><g><path fill-rule="evenodd" clip-rule="evenodd" d="M160,26c0,0-5-2.135-5-5.043C155,14.744,155,5,155,5c0-2.761-2.238-5-5-5H10C7.239,0,5,2.239,5,5c0,0,0,9.803,0,16.014C5,23.893,0,26,0,26H160z"></path></g><foreignObject width="0" height="0" overflow="hidden"><div class="tracklist-toggle-fallback"></div></foreignObject></switch></svg><div class="tracklist-toggle-text" m-click="tracklistShown=!tracklistShown"><span ng-show="tracklistShown" class="tracklist-toggle-arrow arrow-show ng-hide"><span class="tracklist-toggle-text-content">Hide </span></span><span ng-show="!tracklistShown" class="tracklist-toggle-arrow"><span class="tracklist-toggle-text-content">Show </span></span><span class="tracklist-toggle-text-content">Tracklist</span></div></div><div class="cloudcast-tracklist" ng-class="{\'open\':tracklistShown}">';
+
+  showhidebutton += '<a class="btn btn-small btn-inverse brainz-mte" m-click="tracklistShown=!tracklistShown" ng-class="{\'btn-toggled\': tracklistShown}"><svg class="" xmlns="http://www.w3.org/2000/svg" width="19px" height="14px" viewBox="0 0 19 14" version="1.1"><path d="M6,2h12c0.6,0,1-0.4,1-1s-0.4-1-1-1H6C5.4,0,5,0.4,5,1S5.4,2,6,2z M18,12H6c-0.6,0-1,0.4-1,1s0.4,1,1,1h12\n\rc0.6,0,1-0.4,1-1S18.6,12,18,12z M1.5,0H1C0.4,0,0,0.4,0,1s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,0,1.5,0z M1.5,12H1c-0.6,0-1,0.4-1,1\n\rs0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,12,1.5,12z \n\rC19,6.4,18.6,6,18,6z M1.5,6H1C0.4,6,0,6.4,0,7s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,6,1.5,6z"></path></svg><span ng-show="tracklistShown" class="ng-hide">Hide </span><span ng-show="!tracklistShown" class="">Show </span>tracklist</a>';
   
+  
+  brainzinsertionooo += '<div ng-init="tracklistShown=false;"><div class="tracklist-wrap" ng-show="tracklistShown"><div class="inner-container"><div class="content"><h1>Tracklist</h1><ul class="show-tracklist" ng-init="tracklistShown=false;">';
+
   brainzinsertionooo += tracks;
   
-  brainzinsertionooo += '</div></div></div>';
+  brainzinsertionooo += '</ul></div></div></div></div>';
+
+  $('footer.actions').append(showhidebutton);
   
-  $('.cloudcast-header').after(brainzinsertionooo);
+  $('.show-header').after(brainzinsertionooo);
   
-  $('.tracklist-toggle-text').click(function() {
-	if ( !$('.cloudcast-tracklist').hasClass('open') ) {
-		$('.tracklist-toggle-arrow:nth-child(2)').addClass('ng-hide');
-		$('.arrow-show').removeClass('ng-hide');
-		$('.cloudcast-tracklist').addClass('open');
+  $('.brainz-mte').click(function() {
+	if ( !$('.cloudcast-tracklist').hasClass('btn-toggled') ) {
+		$('.cloudcast-tracklist').addClass('btn-toggled');
+		$('.tracklist-wrap').removeClass('ng-hide');
 	} else {
-		$('.tracklist-toggle-arrow:nth-child(2)').removeClass('ng-hide');
-		$('.arrow-show').addClass('ng-hide');
-		$('.cloudcast-tracklist').removeClass('open');
+		$('.cloudcast-tracklist').removeClass('btn-toggled');
+		$('.tracklist-wrap').addClass('ng-hide');
 	}
   });
   
