@@ -21,7 +21,7 @@ $.getJSON( keyurl ).done(function( brainzrapedata ) {
   }
   
 
-  showhidebutton += '<a class="btn btn-small btn-inverse brainz-mte" m-click="tracklistShown=!tracklistShown" ng-class="{\'btn-toggled\': tracklistShown}"><svg class="" xmlns="http://www.w3.org/2000/svg" width="19px" height="14px" viewBox="0 0 19 14" version="1.1"><path d="M6,2h12c0.6,0,1-0.4,1-1s-0.4-1-1-1H6C5.4,0,5,0.4,5,1S5.4,2,6,2z M18,12H6c-0.6,0-1,0.4-1,1s0.4,1,1,1h12\n\rc0.6,0,1-0.4,1-1S18.6,12,18,12z M1.5,0H1C0.4,0,0,0.4,0,1s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,0,1.5,0z M1.5,12H1c-0.6,0-1,0.4-1,1\n\rs0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,12,1.5,12z \n\rC19,6.4,18.6,6,18,6z M1.5,6H1C0.4,6,0,6.4,0,7s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,6,1.5,6z"></path></svg><span ng-show="tracklistShown" class="ng-hide">Hide </span><span ng-show="!tracklistShown" class="">Show </span>tracklist</a>';
+  showhidebutton += '<a class="btn btn-small btn-inverse btn-toggled brainz-mte" m-click="tracklistShown=!tracklistShown" ng-class="{\'btn-toggled\': tracklistShown}" style="margin-left: 10px;"><svg class="" xmlns="http://www.w3.org/2000/svg" width="19px" height="14px" viewBox="0 0 19 14" version="1.1"><path d="M6,2h12c0.6,0,1-0.4,1-1s-0.4-1-1-1H6C5.4,0,5,0.4,5,1S5.4,2,6,2z M18,12H6c-0.6,0-1,0.4-1,1s0.4,1,1,1h12\n\r    	c0.6,0,1-0.4,1-1S18.6,12,18,12z M1.5,0H1C0.4,0,0,0.4,0,1s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,0,1.5,0z M1.5,12H1c-0.6,0-1,0.4-1,1\n\r    	s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,12,1.5,12z M18,6H6C5.4,6,5,6.4,5,7l0,0c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1l0,0\n\r    	C19,6.4,18.6,6,18,6z M1.5,6H1C0.4,6,0,6.4,0,7s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,6,1.5,6z"></path></svg><span ng-show="tracklistShown" class="">Hide </span><span ng-show="!tracklistShown" class="ng-hide">Show </span>tracklist</a>';
   
   
   brainzinsertionooo += '<div ng-init="tracklistShown=false;"><div class="tracklist-wrap" ng-show="tracklistShown"><div class="inner-container"><div class="content"><h1>Tracklist</h1><ul class="show-tracklist" ng-init="tracklistShown=false;">';
@@ -35,11 +35,13 @@ $.getJSON( keyurl ).done(function( brainzrapedata ) {
   $('.show-header').after(brainzinsertionooo);
   
   $('.brainz-mte').click(function() {
-	if ( !$('.cloudcast-tracklist').hasClass('btn-toggled') ) {
-		$('.cloudcast-tracklist').addClass('btn-toggled');
+	if ( !$('.brainz-mte').hasClass('btn-toggled') ) {
+		$('.brainz-mte').addClass('btn-toggled');
+		$('.brainz-mte span').toggleClass('ng-hide');
 		$('.tracklist-wrap').removeClass('ng-hide');
 	} else {
-		$('.cloudcast-tracklist').removeClass('btn-toggled');
+		$('.brainz-mte').removeClass('btn-toggled');
+		$('.brainz-mte span').toggleClass('ng-hide');
 		$('.tracklist-wrap').addClass('ng-hide');
 	}
   });
