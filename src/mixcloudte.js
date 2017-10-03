@@ -34,9 +34,9 @@ insertMTEButton = function() {
 	  for (var track in brainzrapedata.cloudcast.sections) {
 	  	  starttime = (brainzrapedata.cloudcast.sections[track].start_time) ? brainzrapedata.cloudcast.sections[track].start_time : '';
 		  if (brainzrapedata.cloudcast.sections[track].hasOwnProperty('chapter')) {
-			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].chapter+'</b></li>';
+			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].chapter+'</b> <span class="starttime"> | '+fmtMSS(starttime)+'</span></li>';
 		  } else {	 
-			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].title+'</b><small>by <span>'+brainzrapedata.cloudcast.sections[track].artist+'</span></small><span class="starttime"> | '+fmtMSS(starttime)+'</span></li>';
+			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].title+'</b> <small>by <span>'+brainzrapedata.cloudcast.sections[track].artist+'</span></small><span class="starttime"> | '+fmtMSS(starttime)+'</span></li>';
 		  }
 		  
 		  trackno++;
