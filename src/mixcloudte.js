@@ -17,6 +17,9 @@ gmloadScript = function(sScriptSrc) {
     oScript.src = sScriptSrc;
     oHead.appendChild(oScript);
 },
+fmtMSS = function(s){
+	return(s-(s%=60))/60+(9<s?':':':0')+s;
+},
 insertMTEButton = function() {
 	
 	$.getJSON( keyurl ).done(function( brainzrapedata ) {
@@ -33,7 +36,7 @@ insertMTEButton = function() {
 		  if (brainzrapedata.cloudcast.sections[track].hasOwnProperty('chapter')) {
 			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].chapter+'</b></li>';
 		  } else {	 
-			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].title+'</b><small>by <span>'+brainzrapedata.cloudcast.sections[track].artist+'</span></small><span class="starttime"> | '+starttime+'</span></li>';
+			  tracks += '<li ng-hide="juno.sections.length" class=""><em>'+trackno+'</em><b title="'+brainzrapedata.cloudcast.sections[track].title+'">'+brainzrapedata.cloudcast.sections[track].title+'</b><small>by <span>'+brainzrapedata.cloudcast.sections[track].artist+'</span></small><span class="starttime"> | '+fmtMSS(starttime)+'</span></li>';
 		  }
 		  
 		  trackno++;
@@ -48,7 +51,7 @@ insertMTEButton = function() {
 
 	  brainzinsertionooo += tracks;
 	  
-	  brainzinsertionooo += '</ul></div></div></div></div><style type="text/css">.starttime { display: none; } .showntimes .starttime { display: inline; } .showtimes {font-size:0.7em; text-transform:uppercase;color: #990000;text-decoration: none;}</style>';
+	  brainzinsertionooo += '</ul></div></div></div></div><style type="text/css">.starttime { display: none; } .showntimes .starttime { display: inline; } .showtimes {font-size:0.5em; text-transform:uppercase;color: #990000;text-decoration: none;float: right;} body .tracklist-wrap { top: auto; margin-bottom: 0;}</style>';
 	  
 	  $('footer.actions').append(showhidebutton);
 	  
