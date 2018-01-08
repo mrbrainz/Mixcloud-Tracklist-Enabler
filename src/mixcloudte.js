@@ -17,19 +17,49 @@ htmlDecode = function(input){
   var doc = new DOMParser().parseFromString(input, "text/html");
   return doc.documentElement.textContent;
 },
+cleanArray = function(actual){
+  var newArray = [];
+  for (var i = 0; i < actual.length; i++) {
+    if (actual[i]) {
+      newArray.push(actual[i]);
+    }
+  }
+  return newArray;
+},
 getSectionData = function() {
 	var raperelaydata = JSON.parse(htmlDecode(document.getElementById('relay-data').innerHTML)),
 	cloudcasts = $.grep(raperelaydata, function(e){ return e.cloudcast; });
+	if (!cloudcasts.length) {
+		alert("Either this isn't a mix, or you'll need to refresh to see the Tracklist");
+		return;
+	}
 	var j=0;
 	for (var cloudcast in cloudcasts) {
 		j++;
+		//console.log(cloudcasts.length);
+		//console.log(j);
 		if (!cloudcasts[cloudcast].hasOwnProperty('viewer')) {
+			if (j === cloudcasts.length) {
+				alert("Either this isn't a mix, or you'll need to refresh to see the Tracklist");
+				return;
+			}
 			continue;
 		}
 		if (!cloudcasts[cloudcast].cloudcast.data.cloudcastLookup.hasOwnProperty('sections')) {
+			if (j === cloudcasts.length) {
+				alert("Either this isn't a mix, or you'll need to refresh to see the Tracklist");
+				return;
+			}
 			continue;
 		}
-		insertMTEButton(formatTracks(cloudcasts[cloudcast].cloudcast.data.cloudcastLookup.sections));
+		var thispath = window.location.pathname.split( '/' ),
+		slug = cleanArray(thispath);
+		slug = slug[slug.length-1]; 
+		if (slug !== cloudcasts[cloudcast].cloudcast.data.cloudcastLookup.slug) {
+			alert("Either this isn't a mix, or you'll need to refresh to see the Tracklist");
+		} else {
+			insertMTEButton(formatTracks(cloudcasts[cloudcast].cloudcast.data.cloudcastLookup.sections));
+		}
 		break;
 	}
 },
