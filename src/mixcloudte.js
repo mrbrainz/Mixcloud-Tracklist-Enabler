@@ -38,14 +38,7 @@ getSectionData = function() {
 		j++;
 		//console.log(cloudcasts.length);
 		//console.log(j);
-		if (!cloudcasts[cloudcast].hasOwnProperty('viewer')) {
-			if (j === cloudcasts.length) {
-				alert("Either this isn't a mix, or you'll need to refresh to see the Tracklist");
-				return;
-			}
-			continue;
-		}
-		if (!cloudcasts[cloudcast].cloudcast.data.cloudcastLookup.hasOwnProperty('sections')) {
+		if (!cloudcasts[cloudcast].hasOwnProperty('query') && !cloudcasts[cloudcast].hasOwnProperty('data') && !cloudcasts[cloudcast].cloudcast.data.hasOwnProperty('cloudcastLookup') && !cloudcasts[cloudcast].cloudcast.data.cloudcastLookup.hasOwnProperty('canShowTracklist')) {
 			if (j === cloudcasts.length) {
 				alert("Either this isn't a mix, or you'll need to refresh to see the Tracklist");
 				return;
