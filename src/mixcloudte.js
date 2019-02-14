@@ -78,7 +78,7 @@ var jqsrc = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
             if (trackdata[track].__typename == "ChapterSection") {
                 tracks += '<div class="tracklist-table-row"><div class="tracklist-table-row-number">' + trackno + '</div><div class="tracklist-table-row-song"><span title="' + trackdata[track].chapter + '">' + trackdata[track].chapter + '</span></div> <span class="starttime"> | ' + fmtMSS(starttime) + '</span></div>';
             } else {
-                tracks += ''<div class="tracklist-table-row"><div class="tracklist-table-row-number">' + trackno + '</div><div class="tracklist-table-row-song"><span title="' + trackdata[track].songName + '">' + trackdata[track].songName + '</span></div> <div class="tracklist-table-row-artist"><span>' + trackdata[track].artistName + '</span></div><span class="starttime"> | ' + fmtMSS(starttime) + '</span></div>';
+                tracks += '<div class="tracklist-table-row"><div class="tracklist-table-row-number">' + trackno + '</div><div class="tracklist-table-row-song"><span title="' + trackdata[track].songName + '">' + trackdata[track].songName + '</span></div> <div class="tracklist-table-row-artist"><span>' + trackdata[track].artistName + '</span></div><span class="starttime"> | ' + fmtMSS(starttime) + '</span></div>';
             }
 
             trackno++;
