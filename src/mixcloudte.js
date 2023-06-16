@@ -1,9 +1,11 @@
 var jqsrc = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
     onjQueryAvailable = function (oCallback) {
         if (typeof(jQuery) === 'function') {
+            //console.log("jQuery Ready");
             oCallback();
         } else {
             setTimeout(function () {
+                //console.log("Waiting for jQuery");
                 window.onjQueryAvailable (oCallback);
             }, 50);
 
@@ -55,9 +57,19 @@ var jqsrc = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
         for (var track in trackdata) {
             starttime = (trackdata[track].startSeconds) ? trackdata[track].startSeconds : '';
             if (trackdata[track].__typename == "ChapterSection") {
-                tracks += '<div class="tracklist-table-row"><div class="tracklist-table-row-number">' + trackno + '</div><div class="tracklist-table-row-song"><span title="' + trackdata[track].chapter + '">' + trackdata[track].chapter + '</span></div><div class="tracklist-table-row-artist"></div><div class="tracklist-table-row-buy"><span class="starttime">' + fmtMSS(starttime) + '</span></div></div>';
+                tracks += '<tr class="styles__Row-css-in-js__sc-XXXXXXX-2 dc-row">'+
+                '<td>' + trackno + '</td>'+
+                '<td>' + trackdata[track].chapter + '</td>'+
+                '<td></td>'+
+              '</tr>';
+                // fmtMSS(starttime)
+                
             } else {
-                tracks += '<div class="tracklist-table-row"><div class="tracklist-table-row-number">' + trackno + '</div><div class="tracklist-table-row-song"><span title="' + trackdata[track].songName + '">' + trackdata[track].songName + '</span></div> <div class="tracklist-table-row-artist"><span>' + trackdata[track].artistName + '</span></div><div class="tracklist-table-row-buy"><span class="starttime">' + fmtMSS(starttime) + '</span></div></div>';
+                tracks += '<tr class="styles__Row-css-in-js__sc-XXXXXXX-2 dc-row">'+
+                '<td>' + trackno + '</td>'+
+                '<td>' + trackdata[track].artistName + '</td>'+
+                '<td>' + trackdata[track].songName + '</td>'+
+              '</tr>';
             }
 
             trackno++;
@@ -72,17 +84,96 @@ var jqsrc = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
         showhidebutton += '<span class="btn btn-small btn-inverse btn-toggled brainz-mte" m-click="tracklistShown=!tracklistShown" ng-class="{\'btn-toggled\': tracklistShown}" style="margin-left: 10px;"><svg class="" xmlns="http://www.w3.org/2000/svg" width="19px" height="14px" viewBox="0 0 19 14" version="1.1"><path d="M6,2h12c0.6,0,1-0.4,1-1s-0.4-1-1-1H6C5.4,0,5,0.4,5,1S5.4,2,6,2z M18,12H6c-0.6,0-1,0.4-1,1s0.4,1,1,1h12\n\r    	c0.6,0,1-0.4,1-1S18.6,12,18,12z M1.5,0H1C0.4,0,0,0.4,0,1s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,0,1.5,0z M1.5,12H1c-0.6,0-1,0.4-1,1\n\r    	s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,12,1.5,12z M18,6H6C5.4,6,5,6.4,5,7l0,0c0,0.6,0.4,1,1,1h12c0.6,0,1-0.4,1-1l0,0\n\r    	C19,6.4,18.6,6,18,6z M1.5,6H1C0.4,6,0,6.4,0,7s0.4,1,1,1h0.5c0.6,0,1-0.4,1-1S2.1,6,1.5,6z"></path></svg><span ng-show="tracklistShown" class="">Hide </span><span ng-show="!tracklistShown" class="ng-hide">Show </span>tracklist</span>';
 
 
-        brainzinsertionooo += '<div><div class="tracklist-wrap cf"><h1>Tracklist <a class="showtimes" style="display: none;">Show times</a></h1><div class="tracklist-table"><div><div class="tracklist-table-row tracklist-table-row-header"><div class="tracklist-table-row-number">#</div><div class="tracklist-table-row-song">Track</div><div class="tracklist-table-row-artist">Artist</div><div class="tracklist-table-row-buy">Time</div></div>';
+        brainzinsertionooo += 
+        '<style type="text/css">'+
+            '.dc-heading {'+
+                'text-rendering: optimizelegibility;'+
+                '-webkit-font-smoothing: antialiased;'+
+                'letter-spacing: 0px;'+
+                'text-transform: none;'+
+                'font-size: 18px;'+
+                'line-height: normal;'+
+                'font-family: "DM Sans", sans-serif;'+
+                'font-weight: 500;'+
+                'margin-bottom: 16px;'+
+            '}'+
+
+            '.dc-table {'+
+                'width: 100%;'+
+                'border-collapse: separate;'+
+                'border-spacing: 4px;'+
+                'table-layout: fixed;'+
+                'margin-bottom: 42px;'+
+            '}'+
+            '.dc-colgroup {'+
+                'width: 65px;'+
+            '}'+
+            '.dc-headrow {'+
+                'height: 56px;'+
+                'background: rgb(255, 255, 255);'+
+            '}'+
+            '.dc-row {'+
+                'opacity: 1;'+
+                'visibility: visible;'+
+                'transition: visibility 0.3s ease 0s, opacity 0.5s \'ease-in-out 0s;\''+
+            '}'+
+            '.dc-heading th {'+
+                'font-size: 14px;'+
+                'padding-left: 0px;'+
+            '}'+
+            '.dc-table td, .dc-table th {'+
+                'padding: 16px;'+
+                'vertical-align: middle;'+
+                'text-align: left;'+
+                'border-radius: 6px;'+
+                'border: 2px solid rgb(255, 255, 255);'+
+            '}'+
+            '.dc-row td:first-child {'+
+                'width: 65px;'+
+                'text-align: center;'+
+            '}'+
+            '.dc-row td {'+
+                'height: 56px;'+
+                'background: rgb(244, 244, 245);'+
+            '}'+
+        '</style>'+
+            
+            
+            
+        '<div class="styles__Wrapper-css-in-js__sc-XXXXXXX-4">'+
+  '<h3 class="styles__TracklistHeading-css-in-js__sc-XXXXXXX-3 dc-heading">Tracklist</h3>'+
+  '<table class="styles__StyledTable-css-in-js__sc-XXXXXXX-0 dc-table">'+
+   ' <colgroup class="styles__FixedCol-css-in-js__sc-XXXXXXX-6 dc-colgroup"></colgroup>'+
+    '<thead>'+
+      '<tr class="styles__Header-css-in-js__sc-XXXXXXX-1 dc-headrow">'+
+        '<th>#</th>'+
+       ' <th>Artist name</th>'+
+        '<th>Track name</th>'+
+     ' </tr>'+
+    '</thead>'+
+    '<tbody>';
 
         brainzinsertionooo += trackhtml;
 
-        brainzinsertionooo += '</div></div></div></div><style type="text/css">.showntimes .starttime { display: inline; } .showtimes {font-size:0.5em; text-transform:uppercase;color: #990000;text-decoration: none;float: right;} body .tracklist-wrap { top: auto; margin-bottom: 0;}.tracklist-table-row-buy{width: 8%;}</style>';
-
-        $('footer.actions').append(showhidebutton);
-
-        $('.content-wrapper > .inner-container > .content').prepend(brainzinsertionooo);
-
-        $('.brainz-mte').click(function () {
+        brainzinsertionooo += ' </tbody>'+
+'  </table>'+
+'  <!-- <div class="styles__ButtonWrapper-css-in-js__sc-XXXXXXX-3 dynamic-class">'+
+'    <button class="button__StyledButton-css-in-js__sc-XXXXXXX-1 dynamic-class">'+
+'      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__StyledLoadingSVG-css-in-js__sc-XXXXXXX-6 dynamic-class">'+
+'        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.5 12a9.5 9.5 0 01-19 0s2-.02 2 0a7.5 7.5 0 107.47-7.5c-.03 0-.03-2 0-2A9.53 9.53 0 0121.5 12z" fill="#1E2337"></path>'+
+      '</svg>'+
+'      <span class="button__StyledChildren-css-in-js__sc-XXXXXXX-0 dynamic-class">View all (xx)</span>'+
+'    </button>'+
+'  </div> -->'+
+'</div>';
+        
+        //console.log(["inserting into your mum",brainzinsertionooo,showhidebutton])
+        
+        
+        //$('footer.actions').append(showhidebutton);
+        $("div[class*='styles__Description']").after(brainzinsertionooo);
+        
+        /* $('.brainz-mte').click(function () {
             if (!$('.brainz-mte').hasClass('btn-toggled')) {
                 $('.brainz-mte').addClass('btn-toggled');
                 $('.brainz-mte span').toggleClass('ng-hide');
@@ -102,7 +193,7 @@ var jqsrc = '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
                 $('.tracklist-wrap').removeClass('showntimes');
                 $('.showtimes').text('Show times');
             }
-        });
+        }); */
 
         return;
     },
